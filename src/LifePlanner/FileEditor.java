@@ -141,8 +141,11 @@ public class FileEditor extends javax.swing.JFrame
         {
             System.out.println("Problem while writing file." + ex);
         }
-        this.notesScreen.refresh();
-        this.dispose();
+        finally
+        {
+            this.notesScreen.refresh();
+            this.dispose();
+        }
     }//GEN-LAST:event_doneButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

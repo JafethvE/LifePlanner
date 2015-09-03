@@ -33,7 +33,10 @@ public class NotesScreen extends javax.swing.JFrame {
         {
             System.out.println("Problem while reading in Strings for the notes screen." + e);
         }
-        refresh();
+        finally
+        {
+            refresh();
+        }
     }
     
     private void setStrings() throws IOException
