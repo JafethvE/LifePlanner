@@ -118,6 +118,15 @@ public class MainScreen extends javax.swing.JFrame {
             printWriter.printf("%s" + "%n", "[meta]\n" +
 "language = English\n" +
 "\n" +
+"[common]\n" +
+"ok = Ok\n" +
+"delete = Delete\n" +
+"refresh = Refresh\n" +
+"new = New\n" +
+"details = Details\n" +
+"cancel = Cancel\n" +
+"done = Done\n" +
+"\n" +
 "[main]\n" +
 "title = Lifeplanner\n" +
 "goals = Goals\n" +
@@ -141,20 +150,10 @@ public class MainScreen extends javax.swing.JFrame {
 "\n" +
 "[notes]\n" +
 "title = Notes\n" +
-"delete = Delete\n" +
-"details = Details\n" +
-"newNote = New\n" +
-"ok = Ok\n" +
-"refresh = Refresh\n" +
 "\n" +
 "[settings]\n" +
 "title = Settings\n" +
 "language = Language:\n" +
-"ok = Ok\n" +
-"cancel = Cancel\n" +
-"\n" +
-"[newNote]\n" +
-"done = Done\n" +
 "\n" +
 "[error]\n" +
 "unselected = Please select a file");
@@ -163,6 +162,15 @@ public class MainScreen extends javax.swing.JFrame {
         {
             printWriter.printf("%s" + "%n", "[meta]\n" +
 "language = Nederlands\n" +
+"\n" +
+"[common]\n" +
+"ok = Ok\n" +
+"delete = Verwijder\n" +
+"refresh = Ververs\n" +
+"new = Nieuw\n" +
+"details = Details\n" +
+"cancel = Annuleren\n" +
+"done = Klaar\n" +
 "\n" +
 "[main]\n" +
 "title = Levensplanner\n" +
@@ -187,20 +195,10 @@ public class MainScreen extends javax.swing.JFrame {
 "\n" +
 "[notes]\n" +
 "title = Notities\n" +
-"delete = Verwijder\n" +
-"details = Details\n" +
-"newNote = Nieuw\n" +
-"ok = Ok\n" +
-"refresh = Ververs\n" +
 "\n" +
 "[settings]\n" +
 "title = Instellingen\n" +
 "language = Taal:\n" +
-"ok = Ok\n" +
-"cancel = Annuleren\n" +
-"\n" +
-"[newNote]\n" +
-"done = Klaar\n" +
 "\n" +
 "[error]\n" +
 "unselected = Selecteer een file");

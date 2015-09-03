@@ -40,7 +40,7 @@ public class FileEditor extends javax.swing.JFrame
     {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
         Ini language = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages\\" + ini.get("header", "language") + ".ini"));
-        doneButton.setText(language.get("newNote", "done"));
+        doneButton.setText(language.get("common", "done"));
     }
     
     private void openFile()

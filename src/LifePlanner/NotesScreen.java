@@ -41,11 +41,11 @@ public class NotesScreen extends javax.swing.JFrame {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
         Ini language = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages\\" + ini.get("header", "language") + ".ini"));
         this.titleLabel.setText(language.get("notes", "title"));
-        this.deleteButton.setText(language.get("notes", "delete"));
-        this.detailsButton.setText(language.get("notes", "details"));
-        this.newNoteButton.setText(language.get("notes", "newNote"));
-        this.okButton.setText(language.get("notes", "ok"));
-        this.refreshButton.setText(language.get("notes", "refresh"));
+        this.deleteButton.setText(language.get("common", "delete"));
+        this.detailsButton.setText(language.get("common", "details"));
+        this.newNoteButton.setText(language.get("common", "new"));
+        this.okButton.setText(language.get("common", "ok"));
+        this.refreshButton.setText(language.get("common", "refresh"));
         this.unselectedError = language.get("error", "unselected");
     }
     

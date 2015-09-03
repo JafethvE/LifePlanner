@@ -64,8 +64,8 @@ public class SettingsScreen extends javax.swing.JFrame {
         Ini language = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages\\" + ini.get("header", "language") + ".ini"));
         titleLabel.setText(language.get("settings", "title"));
         languageLabel.setText(language.get("settings", "language"));
-        okButton.setText(language.get("settings", "ok"));
-        cancelButton.setText(language.get("settings", "cancel"));
+        okButton.setText(language.get("common", "ok"));
+        cancelButton.setText(language.get("common", "cancel"));
     }
     
     private void changeLanguage() throws IOException
