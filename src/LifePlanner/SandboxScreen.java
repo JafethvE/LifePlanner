@@ -36,6 +36,10 @@ public class SandboxScreen extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Sets the texts in the labels and on the buttons from the language settings file.
+     * @throws IOException 
+     */
     private void setStrings() throws IOException
     {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));

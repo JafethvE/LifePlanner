@@ -12,8 +12,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import org.ini4j.Ini;
 
@@ -28,6 +26,7 @@ public class SettingsScreen extends javax.swing.JFrame {
     
     /**
      * Creates new form SettingsScreen
+     * @param mainScreen the mainScreen this screen belongs to.
      */
     public SettingsScreen(MainScreen mainScreen)
     {
@@ -44,6 +43,9 @@ public class SettingsScreen extends javax.swing.JFrame {
         getLanguages();
     }
     
+    /**
+     * Retrieves the language files to choose from.
+     */
     private void getLanguages()
     {
         Filter filter = new Filter(".ini");
@@ -58,6 +60,10 @@ public class SettingsScreen extends javax.swing.JFrame {
         this.languageDropDown.setModel(model);
     }
     
+    /**
+     * Sets the texts in the labels and on the buttons from the language settings file.
+     * @throws IOException 
+     */
     private void setStrings() throws IOException
     {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
@@ -68,6 +74,10 @@ public class SettingsScreen extends javax.swing.JFrame {
         cancelButton.setText(language.get("common", "cancel"));
     }
     
+    /**
+     * Changes the language the program communicates to the user with.
+     * @throws IOException 
+     */
     private void changeLanguage() throws IOException
     {
         File f = (File)this.languageDropDown.getSelectedItem();
@@ -90,6 +100,11 @@ public class SettingsScreen extends javax.swing.JFrame {
         mainScreen.setStrings();
     }
     
+    /**
+     * Opens a file and gives back its content.
+     * @return a String array with the content of the opened file.
+     * @throws IOException 
+     */
     private String[] openFile() throws IOException
     {
         FileReader fr = new FileReader("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini");
@@ -111,6 +126,11 @@ public class SettingsScreen extends javax.swing.JFrame {
         return textData;
     }
     
+    /**
+     * Counts the amount of lines in a file.
+     * @return The amount of lines in the file.
+     * @throws IOException 
+     */
     private int readLines() throws IOException
     {
         FileReader fileToRead = new FileReader("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini");

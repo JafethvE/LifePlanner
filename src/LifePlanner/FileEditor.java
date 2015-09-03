@@ -36,6 +36,10 @@ public class FileEditor extends javax.swing.JFrame
         openFile();
     }
     
+    /**
+     * Sets the texts in the labels and on the buttons from the language settings file.
+     * @throws IOException 
+     */
     private void setStrings() throws IOException
     {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
@@ -43,6 +47,9 @@ public class FileEditor extends javax.swing.JFrame
         doneButton.setText(language.get("common", "done"));
     }
     
+    /**
+     * Opens a specific file in the editor.
+     */
     private void openFile()
     {
         try
@@ -72,6 +79,10 @@ public class FileEditor extends javax.swing.JFrame
         }
     }
     
+    /**
+     * Writes a file.
+     * @throws IOException 
+     */
     private void writeFile() throws IOException
     {
         file.writeToFile(this.titleField.getText(), false);
@@ -132,6 +143,10 @@ public class FileEditor extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Tries to write the changes to the file, refreshes the files list and closes the window.
+     * @param evt The event that has to be passed through but isn't used.
+     */
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         try
         {

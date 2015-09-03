@@ -44,7 +44,9 @@ public class MainScreen extends javax.swing.JFrame {
             System.out.println("Problem while reading in Strings for the main screen." + e);
         }
     }
-    
+    /**
+     * Finds the settings and language files for the program.
+     */
     private void findFiles()
     {
         findSettingsFile();
@@ -52,6 +54,9 @@ public class MainScreen extends javax.swing.JFrame {
         findLanguageFile("Nederlands");
     }
     
+    /**
+     * Finds the settings file for the program.
+     */
     private void findSettingsFile()
     {
         Ini ini = null;
@@ -76,6 +81,10 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Finds a specific language file for the program.
+     * @param language The language for which a file is to be found.
+     */
     private void findLanguageFile(String language)
     {
         Ini ini = null;
@@ -100,6 +109,10 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Creates the settings file with the default settings.
+     * @throws IOException 
+     */
     private void createSettingsFile() throws IOException
     {   
         FileWriter fileWriter = new FileWriter("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini", false);
@@ -109,6 +122,11 @@ public class MainScreen extends javax.swing.JFrame {
         printWriter.close();
     }
     
+    /**
+     * Creates a specific language file.
+     * @param language The language for which the file is made.
+     * @throws IOException 
+     */
     private void createLanguageFile(String language) throws IOException
     {
         FileWriter fileWriter = new FileWriter("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages\\" + language + ".ini", false);
@@ -206,6 +224,10 @@ public class MainScreen extends javax.swing.JFrame {
         printWriter.close();
     }
     
+    /**
+     * Sets the texts in the labels and on the buttons from the language settings file.
+     * @throws IOException 
+     */
     public void setStrings() throws IOException
     {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
@@ -222,6 +244,9 @@ public class MainScreen extends javax.swing.JFrame {
         entertainmentButton.setText(language.get("main", "entertainment"));
     }
     
+    /**
+     * Creates the file system for the program if it doesn't already.
+     */
     private void createFilePath()
     {
         String error = "Directory creation failed at: ";
@@ -396,12 +421,20 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_toStudyButtonActionPerformed
 
+    /**
+     * Creates a sandboxScreen
+     * @param evt The event that has to be passed through but isn't used.
+     */
     private void sandboxButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sandboxButtonActionPerformed
         SandboxScreen sandboxScreen = new SandboxScreen();
         sandboxScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         sandboxScreen.setVisible(true);
     }//GEN-LAST:event_sandboxButtonActionPerformed
 
+    /**
+     * Creates a settingsScreen.
+     * @param evt The event that has to be passed through but isn't used.
+     */
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
         SettingsScreen settingsScreen = new SettingsScreen(this);
         settingsScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

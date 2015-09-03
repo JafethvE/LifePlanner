@@ -39,6 +39,10 @@ public class NotesScreen extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Sets the texts in the labels and on the buttons from the language settings file.
+     * @throws IOException 
+     */
     private void setStrings() throws IOException
     {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
@@ -52,6 +56,9 @@ public class NotesScreen extends javax.swing.JFrame {
         this.unselectedError = language.get("error", "unselected");
     }
     
+    /**
+     * Refreshes the notes list.
+     */
     public void refresh()
     {
         noteAmount = 0;
@@ -68,6 +75,10 @@ public class NotesScreen extends javax.swing.JFrame {
         this.fileList.setModel(model);
     }
     
+    /**
+     * Creates and shows a FileEditor with a file to be worked.
+     * @param file The file to be worked.
+     */
     private void createNewFileEditor(String file)
     {
         FileEditor fileEditor = new FileEditor(file, this);
@@ -190,10 +201,18 @@ public class NotesScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Closes the window.
+     * @param evt The event that has to be passed through but isn't used.
+     */
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
+    /**
+     * Shows the content of the selected file.
+     * @param evt The event that has to be passed through but isn't used.
+     */ 
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
         if(this.fileList.getSelectedValue() != null)
         {
@@ -210,6 +229,10 @@ public class NotesScreen extends javax.swing.JFrame {
         this.refresh();
     }//GEN-LAST:event_refreshButtonActionPerformed
 
+    /**
+     * Creates a new note and opens a file editor to work it.
+     * @param evt The event that has to be passed through but isn't used.
+     */ 
     private void newNoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newNoteButtonActionPerformed
         int number = noteAmount + 1;
         String fileName = "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Notes\\Note " + (number) + ".txt";
@@ -223,6 +246,11 @@ public class NotesScreen extends javax.swing.JFrame {
         createNewFileEditor(fileName);
     }//GEN-LAST:event_newNoteButtonActionPerformed
 
+    /**
+     * Checks a file path to determine if the file exists.
+     * @param filePath The file path to be checked.
+     * @return if the file exists or not.
+     */
     private boolean fileExists(String filePath)
     {
         boolean fileExists = false;
@@ -238,6 +266,10 @@ public class NotesScreen extends javax.swing.JFrame {
         return fileExists;
     }
     
+    /**
+     * Deletes the selected file.
+     * @param evt The event that has to be passed through but isn't used.
+     */
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         if(this.fileList.getSelectedValue() != null)
         {

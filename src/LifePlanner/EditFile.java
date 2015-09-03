@@ -31,12 +31,22 @@ public class EditFile
         this.path = path;
     }
     
+    /**
+     * Reads the given file.
+     * @param path The path of the file to be read.
+     * @param appendToFile Determines the way the file is written over.
+     */
     public EditFile(String path, boolean appendToFile)
     {
         this.appendToFile = appendToFile;
         this.path = path;
     }
     
+    /**
+     * Opens a file and gives back its content.
+     * @return The content of the file given.
+     * @throws IOException 
+     */
     public String[] openFile() throws IOException
     {
         FileReader fr = new FileReader(path);
@@ -83,6 +93,12 @@ public class EditFile
         return numberOfLines;
     }
     
+    /**
+     * Writes the file with content.
+     * @param textLine The content to be written to the file.
+     * @param appendToFile Determines the way the file is written.
+     * @throws IOException 
+     */
     public void writeToFile(String textLine, boolean appendToFile) throws IOException
     {
         FileWriter fileWriter = new FileWriter(path, appendToFile);
