@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LifePlanner;
 
 import com.sun.security.auth.module.NTSystem;
@@ -16,7 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import org.ini4j.Ini;
 
 /**
- *
+ * The screen for displaying and changing the settings of the program.
  * @author Jafeth
  */
 public class SettingsScreen extends javax.swing.JFrame {

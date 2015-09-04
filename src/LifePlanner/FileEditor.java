@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.ini4j.Ini;
 
 /**
- *
+ * A screen for editing text files.
  * @author Jafeth
  */
 public class FileEditor extends javax.swing.JFrame

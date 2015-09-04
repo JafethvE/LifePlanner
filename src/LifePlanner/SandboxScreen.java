@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LifePlanner;
 
 import com.sun.security.auth.module.NTSystem;
@@ -12,7 +7,7 @@ import javax.swing.JFrame;
 import org.ini4j.Ini;
 
 /**
- *
+ * A menu of the sandbox functions of the program.
  * @author Jafeth
  */
 public class SandboxScreen extends javax.swing.JFrame {

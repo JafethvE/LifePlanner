@@ -8,7 +8,7 @@ import javax.swing.ListModel;
 import org.ini4j.Ini;
 
 /**
- *
+ * A overview of the notes the program has saved.
  * @author Jafeth
  */
 public class NotesScreen extends javax.swing.JFrame {
