@@ -12,55 +12,53 @@ import org.ini4j.Ini;
 
 /**
  * The screen for displaying and changing the settings of the program.
+ *
  * @author Jafeth
  */
 public class SettingsScreen extends javax.swing.JFrame {
 
     private NTSystem NTSystem;
     private MainScreen mainScreen;
-    
+
     /**
      * Creates new form SettingsScreen
+     *
      * @param mainScreen the mainScreen this screen belongs to.
      */
-    public SettingsScreen(MainScreen mainScreen)
-    {
+    public SettingsScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
         NTSystem = new com.sun.security.auth.module.NTSystem();
         initComponents();
-        try
-        {
+        try {
             setStrings();
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Problem while reading in Strings for the settings screen." + e);
         }
         getLanguages();
     }
-    
+
     /**
      * Retrieves the language files to choose from.
      */
-    private void getLanguages()
-    {
+    private void getLanguages() {
         Filter filter = new Filter(".ini");
         File[] files = filter.finder("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages");
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-        
-        for(File file : files)
-        {
+
+        for (File file : files) {
             model.addElement(file);
         }
-        
+
         this.languageDropDown.setModel(model);
     }
-    
+
     /**
-     * Sets the texts in the labels and on the buttons from the language settings file.
-     * @throws IOException 
+     * Sets the texts in the labels and on the buttons from the language
+     * settings file.
+     *
+     * @throws IOException
      */
-    private void setStrings() throws IOException
-    {
+    private void setStrings() throws IOException {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
         Ini language = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages\\" + ini.get("header", "language") + ".ini"));
         titleLabel.setText(language.get("settings", "title"));
@@ -68,83 +66,72 @@ public class SettingsScreen extends javax.swing.JFrame {
         okButton.setText(language.get("common", "ok"));
         cancelButton.setText(language.get("common", "cancel"));
     }
-    
+
     /**
      * Changes the language the program communicates to the user with.
-     * @throws IOException 
+     *
+     * @throws IOException
      */
-    private void changeLanguage() throws IOException
-    {
-        File f = (File)this.languageDropDown.getSelectedItem();
+    private void changeLanguage() throws IOException {
+        File f = (File) this.languageDropDown.getSelectedItem();
         String textLine = "language = " + f.getName().replaceAll(".ini", "");
         String[] ini = openFile();
         FileWriter fileWriter = new FileWriter("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini", false);
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        for(int i = 0; i < ini.length; i++)
-        {
-            if(ini[i].contains("language"))
-            {
+        for (int i = 0; i < ini.length; i++) {
+            if (ini[i].contains("language")) {
                 printWriter.printf("%s" + "%n", textLine);
-            }
-            else
-            {
+            } else {
                 printWriter.printf("%s" + "%n", ini[i]);
             }
         }
         printWriter.close();
         mainScreen.setStrings();
     }
-    
+
     /**
      * Opens a file and gives back its content.
+     *
      * @return a String array with the content of the opened file.
-     * @throws IOException 
+     * @throws IOException
      */
-    private String[] openFile() throws IOException
-    {
+    private String[] openFile() throws IOException {
         FileReader fr = new FileReader("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini");
         String[] textData;
         int numberOfLines = readLines();
         textData = new String[numberOfLines];
-        try (BufferedReader textReader = new BufferedReader(fr))
-        {
-            for(int i = 0; i < numberOfLines;i++)
-            {
+        try (BufferedReader textReader = new BufferedReader(fr)) {
+            for (int i = 0; i < numberOfLines; i++) {
                 textData[i] = textReader.readLine();
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Problem while opening file." + e);
         }
-        
+
         return textData;
     }
-    
+
     /**
      * Counts the amount of lines in a file.
+     *
      * @return The amount of lines in the file.
-     * @throws IOException 
+     * @throws IOException
      */
-    private int readLines() throws IOException
-    {
+    private int readLines() throws IOException {
         FileReader fileToRead = new FileReader("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini");
         int numberOfLines;
         numberOfLines = 0;
-        try (BufferedReader bf = new BufferedReader(fileToRead))
-        {
-            while(bf.readLine() != null)
-            {
+        try (BufferedReader bf = new BufferedReader(fileToRead)) {
+            while (bf.readLine() != null) {
                 numberOfLines++;
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Problem while reading the amount of lines." + e);
         }
-        
+
         return numberOfLines;
     }
+
     /**
      * This method is called from within the constructor to initialise the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -219,12 +206,9 @@ public class SettingsScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        try
-        {
+        try {
             changeLanguage();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Problem while changing languages" + e);
         }
         dispose();

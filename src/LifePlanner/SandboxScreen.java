@@ -8,35 +8,33 @@ import org.ini4j.Ini;
 
 /**
  * A menu of the sandbox functions of the program.
+ *
  * @author Jafeth
  */
 public class SandboxScreen extends javax.swing.JFrame {
 
     private NTSystem NTSystem;
-    
+
     /**
      * Creates new form SandboxScreen
      */
-    public SandboxScreen()
-    {
+    public SandboxScreen() {
         NTSystem = new com.sun.security.auth.module.NTSystem();
         initComponents();
-        try
-        {
+        try {
             setStrings();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.out.println("Problem while reading in Strings for the sandbox screen." + e);
         }
     }
-    
+
     /**
-     * Sets the texts in the labels and on the buttons from the language settings file.
-     * @throws IOException 
+     * Sets the texts in the labels and on the buttons from the language
+     * settings file.
+     *
+     * @throws IOException
      */
-    private void setStrings() throws IOException
-    {
+    private void setStrings() throws IOException {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
         Ini language = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages\\" + ini.get("header", "language") + ".ini"));
         titleLabel.setText(language.get("sandbox", "title"));

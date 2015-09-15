@@ -10,19 +10,19 @@ import org.ini4j.Ini;
 
 /**
  * Main screen for the program.
+ *
  * @author Jafeth
  */
 public class MainScreen extends javax.swing.JFrame {
 
     private NTSystem NTSystem;
-    
-    public static void main(String[] args) throws IOException
-    {
+
+    public static void main(String[] args) throws IOException {
         MainScreen mainScreen = new MainScreen();
         mainScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainScreen.setVisible(true);
     }
-    
+
     /**
      * Creates new form MainScreen
      */
@@ -31,201 +31,191 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
         createFilePath();
         findFiles();
-        try
-        {
+        try {
             setStrings();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Problem while reading in Strings for the main screen." + e);
         }
     }
+
     /**
      * Finds the settings and language files for the program.
      */
-    private void findFiles()
-    {
+    private void findFiles() {
         findSettingsFile();
         findLanguageFile("English");
         findLanguageFile("Nederlands");
     }
-    
+
     /**
      * Finds the settings file for the program.
      */
-    private void findSettingsFile()
-    {
+    private void findSettingsFile() {
         Ini ini = null;
-        try
-        {
+        try {
             ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Error while trying to find settings ini file." + e);
         }
-        if(ini == null)
-        {
-            try
-            {
+        if (ini == null) {
+            try {
                 createSettingsFile();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.out.println("Problem while creating settings ini files." + e);
             }
         }
     }
-    
+
     /**
      * Finds a specific language file for the program.
+     *
      * @param language The language for which a file is to be found.
      */
-    private void findLanguageFile(String language)
-    {
+    private void findLanguageFile(String language) {
         Ini ini = null;
-        try
-        {
+        try {
             ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages\\" + language + ".ini"));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Error while trying to find " + language + " ini file." + e);
         }
-        if(ini == null)
-        {
-            try
-            {
+        if (ini == null) {
+            try {
                 createLanguageFile(language);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.out.println("Problem while creating " + language + " ini file." + e);
             }
         }
     }
-    
+
     /**
      * Creates the settings file with the default settings.
-     * @throws IOException 
+     *
+     * @throws IOException
      */
-    private void createSettingsFile() throws IOException
-    {   
+    private void createSettingsFile() throws IOException {
         FileWriter fileWriter = new FileWriter("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini", false);
         PrintWriter printWriter = new PrintWriter(fileWriter);
         printWriter.printf("%s" + "%n", "[header]\n" + "language = English");
-        
+
         printWriter.close();
     }
-    
+
     /**
      * Creates a specific language file.
+     *
      * @param language The language for which the file is made.
-     * @throws IOException 
+     * @throws IOException
      */
-    private void createLanguageFile(String language) throws IOException
-    {
+    private void createLanguageFile(String language) throws IOException {
         FileWriter fileWriter = new FileWriter("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages\\" + language + ".ini", false);
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        if(language.equals("English"))
-        {
-            printWriter.printf("%s" + "%n", "[meta]\n" +
-"language = English\n" +
-"\n" +
-"[common]\n" +
-"ok = Ok\n" +
-"delete = Delete\n" +
-"refresh = Refresh\n" +
-"new = New\n" +
-"details = Details\n" +
-"cancel = Cancel\n" +
-"done = Done\n" +
-"\n" +
-"[main]\n" +
-"title = Lifeplanner\n" +
-"goals = Goals\n" +
-"entertainment = Entertainment\n" +
-"toStudy = To Study\n" +
-"planning = Planning\n" +
-"today = Today\n" +
-"sandbox = Sandbox\n" +
-"meta = Meta\n" +
-"settings = Settings\n" +
-"about = About\n" +
-"\n" +
-"[sandbox]\n" +
-"title = Sandbox\n" +
-"notes = Notes\n" +
-"summaries = Summaries\n" +
-"ideas = Ideas\n" +
-"suggestions = Suggestions\n" +
-"questions = Questions\n" +
-"inventions = Inventions\n" +
-"\n" +
-"[notes]\n" +
-"title = Notes\n" +
-"\n" +
-"[settings]\n" +
-"title = Settings\n" +
-"language = Language:\n" +
-"\n" +
-"[error]\n" +
-"unselected = Please select a file");
-        }
-        else if(language.equals("Nederlands"))
-        {
-            printWriter.printf("%s" + "%n", "[meta]\n" +
-"language = Nederlands\n" +
-"\n" +
-"[common]\n" +
-"ok = Ok\n" +
-"delete = Verwijder\n" +
-"refresh = Ververs\n" +
-"new = Nieuw\n" +
-"details = Details\n" +
-"cancel = Annuleren\n" +
-"done = Klaar\n" +
-"\n" +
-"[main]\n" +
-"title = Levensplanner\n" +
-"goals = Doelen\n" +
-"entertainment = Entertainment\n" +
-"toStudy = Te Bestuderen\n" +
-"planning = Planning\n" +
-"today = Vandaag\n" +
-"sandbox = Sandbox\n" +
-"meta = Meta\n" +
-"settings = Instellingen\n" +
-"about = Over\n" +
-"\n" +
-"[sandbox]\n" +
-"title = Sandbox\n" +
-"notes = Notities\n" +
-"summaries = Samenvattingen\n" +
-"ideas = Ideeën\n" +
-"suggestions = Suggesties\n" +
-"questions = Vragen\n" +
-"inventions = Uitvindingen\n" +
-"\n" +
-"[notes]\n" +
-"title = Notities\n" +
-"\n" +
-"[settings]\n" +
-"title = Instellingen\n" +
-"language = Taal:\n" +
-"\n" +
-"[error]\n" +
-"unselected = Selecteer een file");
+        if (language.equals("English")) {
+            printWriter.printf("%s" + "%n", "[meta]\n"
+                    + "language = English\n"
+                    + "\n"
+                    + "[common]\n"
+                    + "ok = Ok\n"
+                    + "delete = Delete\n"
+                    + "refresh = Refresh\n"
+                    + "new = New\n"
+                    + "details = Details\n"
+                    + "cancel = Cancel\n"
+                    + "done = Done\n"
+                    + "\n"
+                    + "[main]\n"
+                    + "title = Lifeplanner\n"
+                    + "goals = Goals\n"
+                    + "entertainment = Entertainment\n"
+                    + "toStudy = To Study\n"
+                    + "planning = Planning\n"
+                    + "today = Today\n"
+                    + "sandbox = Sandbox\n"
+                    + "meta = Meta\n"
+                    + "settings = Settings\n"
+                    + "about = About\n"
+                    + "\n"
+                    + "[sandbox]\n"
+                    + "title = Sandbox\n"
+                    + "notes = Notes\n"
+                    + "summaries = Summaries\n"
+                    + "ideas = Ideas\n"
+                    + "suggestions = Suggestions\n"
+                    + "questions = Questions\n"
+                    + "inventions = Inventions\n"
+                    + "\n"
+                    + "[notes]\n"
+                    + "title = Notes\n"
+                    + "\n"
+                    + "[settings]\n"
+                    + "title = Settings\n"
+                    + "language = Language:\n"
+                    + "\n"
+                    + "[error]\n"
+                    + "unselected = Please select a file[about]\n"
+                    + "\n"
+                    + "title = About\n"
+                    + "copyright = Copyright Jafeth van Elten 2015.\n"
+                    + "version = Version: 0.3\n"
+                    + "new = Changelog: Added an about screen, with all strings and translations.");
+        } else if (language.equals("Nederlands")) {
+            printWriter.printf("%s" + "%n", "[meta]\n"
+                    + "language = Nederlands\n"
+                    + "\n"
+                    + "[common]\n"
+                    + "ok = Ok\n"
+                    + "delete = Verwijder\n"
+                    + "refresh = Ververs\n"
+                    + "new = Nieuw\n"
+                    + "details = Details\n"
+                    + "cancel = Annuleren\n"
+                    + "done = Klaar\n"
+                    + "\n"
+                    + "[main]\n"
+                    + "title = Levensplanner\n"
+                    + "goals = Doelen\n"
+                    + "entertainment = Entertainment\n"
+                    + "toStudy = Te Bestuderen\n"
+                    + "planning = Planning\n"
+                    + "today = Vandaag\n"
+                    + "sandbox = Sandbox\n"
+                    + "meta = Meta\n"
+                    + "settings = Instellingen\n"
+                    + "about = Over\n"
+                    + "\n"
+                    + "[sandbox]\n"
+                    + "title = Sandbox\n"
+                    + "notes = Notities\n"
+                    + "summaries = Samenvattingen\n"
+                    + "ideas = Ideeën\n"
+                    + "suggestions = Suggesties\n"
+                    + "questions = Vragen\n"
+                    + "inventions = Uitvindingen\n"
+                    + "\n"
+                    + "[notes]\n"
+                    + "title = Notities\n"
+                    + "\n"
+                    + "[settings]\n"
+                    + "title = Instellingen\n"
+                    + "language = Taal:\n"
+                    + "\n"
+                    + "[error]\n"
+                    + "unselected = Selecteer een file[about]"
+                    + "\n"
+                    + "title = Over\n"
+                    + "copyright = Copyright Jafeth van Elten 2015.\n"
+                    + "version = 0.3\n"
+                    + "new = Laatste wijzigingen: Een over scherm toegevoegd, met alle strings en vertalingen.");
         }
         printWriter.close();
     }
-    
+
     /**
-     * Sets the texts in the labels and on the buttons from the language settings file.
-     * @throws IOException 
+     * Sets the texts in the labels and on the buttons from the language
+     * settings file.
+     *
+     * @throws IOException
      */
-    public void setStrings() throws IOException
-    {
+    public void setStrings() throws IOException {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
         Ini language = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages\\" + ini.get("header", "language") + ".ini"));
         titleLabel.setText(language.get("main", "title"));
@@ -239,67 +229,52 @@ public class MainScreen extends javax.swing.JFrame {
         aboutButton.setText(language.get("main", "about"));
         entertainmentButton.setText(language.get("main", "entertainment"));
     }
-    
+
     /**
      * Creates the file system for the program if it doesn't already.
      */
-    private void createFilePath()
-    {
+    private void createFilePath() {
         String error = "Directory creation failed at: ";
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Notes").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Notes").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Notes");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Summaries").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Summaries").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Summaries");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Ideas").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Ideas").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Ideas");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Suggestions").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Suggestions").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Suggestions");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Questions").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Questions").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Questions");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Inventions").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Inventions").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Inventions");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Goals\\").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Goals\\").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Goals");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Entertainment\\Books").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Entertainment\\Books").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Entertainment\\Books");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Entertainment\\Entertainment\\Films").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Entertainment\\Entertainment\\Films").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Entertainment\\Films");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Entertainment\\Music").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Entertainment\\Music").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Entertainment\\Music");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Summaries").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Summaries").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Summaries");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\To Study").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\To Study").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\To Study");
         }
-        if(!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages").mkdirs())
-        {
+        if (!new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages").mkdirs()) {
             System.out.println(error + "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages");
         }
     }
@@ -347,6 +322,12 @@ public class MainScreen extends javax.swing.JFrame {
         settingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 settingsButtonActionPerformed(evt);
+            }
+        });
+
+        aboutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutButtonActionPerformed(evt);
             }
         });
 
@@ -419,6 +400,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     /**
      * Creates a sandboxScreen
+     *
      * @param evt The event that has to be passed through but isn't used.
      */
     private void sandboxButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sandboxButtonActionPerformed
@@ -429,6 +411,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     /**
      * Creates a settingsScreen.
+     *
      * @param evt The event that has to be passed through but isn't used.
      */
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
@@ -436,6 +419,12 @@ public class MainScreen extends javax.swing.JFrame {
         settingsScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         settingsScreen.setVisible(true);
     }//GEN-LAST:event_settingsButtonActionPerformed
+
+    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
+        AboutScreen about = new AboutScreen();
+        about.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        about.setVisible(true);
+    }//GEN-LAST:event_aboutButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aboutButton;

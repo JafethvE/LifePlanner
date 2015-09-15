@@ -9,6 +9,7 @@ import org.ini4j.Ini;
 
 /**
  * An overview of the notes the program has saved.
+ *
  * @author Jafeth
  */
 public class NotesScreen extends javax.swing.JFrame {
@@ -16,35 +17,30 @@ public class NotesScreen extends javax.swing.JFrame {
     private int noteAmount;
     private final com.sun.security.auth.module.NTSystem NTSystem;
     private String unselectedError;
-    
+
     /**
      * Creates new form MainScreen
      */
-    public NotesScreen()
-    {
+    public NotesScreen() {
         NTSystem = new com.sun.security.auth.module.NTSystem();
         noteAmount = 0;
         initComponents();
-        try
-        {
+        try {
             setStrings();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.out.println("Problem while reading in Strings for the notes screen." + e);
-        }
-        finally
-        {
+        } finally {
             refresh();
         }
     }
-    
+
     /**
-     * Sets the texts in the labels and on the buttons from the language settings file.
-     * @throws IOException 
+     * Sets the texts in the labels and on the buttons from the language
+     * settings file.
+     *
+     * @throws IOException
      */
-    private void setStrings() throws IOException
-    {
+    private void setStrings() throws IOException {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
         Ini language = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages\\" + ini.get("header", "language") + ".ini"));
         this.titleLabel.setText(language.get("notes", "title"));
@@ -55,32 +51,30 @@ public class NotesScreen extends javax.swing.JFrame {
         this.refreshButton.setText(language.get("common", "refresh"));
         this.unselectedError = language.get("error", "unselected");
     }
-    
+
     /**
      * Refreshes the notes list.
      */
-    public void refresh()
-    {
+    public void refresh() {
         noteAmount = 0;
         Filter filter = new Filter(".txt");
         File[] files = filter.finder("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Notes");
         DefaultListModel model = new DefaultListModel();
-        
-        for(File file : files)
-        {
+
+        for (File file : files) {
             model.addElement(file);
             noteAmount++;
         }
-        
+
         this.fileList.setModel(model);
     }
-    
+
     /**
      * Creates and shows a FileEditor with a file to be worked.
+     *
      * @param file The file to be worked.
      */
-    private void createNewFileEditor(String file)
-    {
+    private void createNewFileEditor(String file) {
         FileEditor fileEditor = new FileEditor(file, this);
         fileEditor.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fileEditor.setVisible(true);
@@ -203,6 +197,7 @@ public class NotesScreen extends javax.swing.JFrame {
 
     /**
      * Closes the window.
+     *
      * @param evt The event that has to be passed through but isn't used.
      */
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
@@ -211,16 +206,14 @@ public class NotesScreen extends javax.swing.JFrame {
 
     /**
      * Shows the content of the selected file.
+     *
      * @param evt The event that has to be passed through but isn't used.
-     */ 
+     */
     private void detailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsButtonActionPerformed
-        if(this.fileList.getSelectedValue() != null)
-        {
+        if (this.fileList.getSelectedValue() != null) {
             this.createNewFileEditor(this.fileList.getSelectedValue().toString());
             this.errorlabel.setText("");
-        }
-        else
-        {
+        } else {
             this.errorlabel.setText(unselectedError);
         }
     }//GEN-LAST:event_detailsButtonActionPerformed
@@ -231,14 +224,14 @@ public class NotesScreen extends javax.swing.JFrame {
 
     /**
      * Creates a new note and opens a file editor to work it.
+     *
      * @param evt The event that has to be passed through but isn't used.
-     */ 
+     */
     private void newNoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newNoteButtonActionPerformed
         int number = noteAmount + 1;
         String fileName = "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Notes\\Note " + (number) + ".txt";
         boolean fileExists = fileExists(fileName);
-        while(fileExists)
-        {
+        while (fileExists) {
             number++;
             fileName = "C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Sandbox\\Notes\\Note " + (number) + ".txt";
             fileExists = fileExists(fileName);
@@ -248,41 +241,37 @@ public class NotesScreen extends javax.swing.JFrame {
 
     /**
      * Checks a file path to determine if the file exists.
+     *
      * @param filePath The file path to be checked.
      * @return if the file exists or not.
      */
-    private boolean fileExists(String filePath)
-    {
+    private boolean fileExists(String filePath) {
         boolean fileExists = false;
         ListModel model = this.fileList.getModel();
-        for(int i = 0; i < model.getSize(); i++)
-        {
-            if(filePath.equals(model.getElementAt(i).toString()))
-            {
+        for (int i = 0; i < model.getSize(); i++) {
+            if (filePath.equals(model.getElementAt(i).toString())) {
                 fileExists = true;
                 break;
             }
         }
         return fileExists;
     }
-    
+
     /**
      * Deletes the selected file.
+     *
      * @param evt The event that has to be passed through but isn't used.
      */
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        if(this.fileList.getSelectedValue() != null)
-        {
-            File file = (File)this.fileList.getSelectedValue();
+        if (this.fileList.getSelectedValue() != null) {
+            File file = (File) this.fileList.getSelectedValue();
             file.delete();
             this.refresh();
             this.errorlabel.setText("");
-        }
-        else
-        {
+        } else {
             this.errorlabel.setText(unselectedError);
         }
-        
+
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

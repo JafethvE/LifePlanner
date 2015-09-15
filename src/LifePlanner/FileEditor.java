@@ -7,84 +7,73 @@ import org.ini4j.Ini;
 
 /**
  * A screen for editing text files.
+ *
  * @author Jafeth
  */
-public class FileEditor extends javax.swing.JFrame
-{
+public class FileEditor extends javax.swing.JFrame {
+
     private NTSystem NTSystem;
     EditFile file;
     NotesScreen notesScreen;
-    
+
     /**
      * Creates new form FileReader
+     *
      * @param fileName The name of the file to be read.
      */
-    public FileEditor(String fileName, NotesScreen notesScreen)
-    {
+    public FileEditor(String fileName, NotesScreen notesScreen) {
         NTSystem = new com.sun.security.auth.module.NTSystem();
         this.notesScreen = notesScreen;
         file = new EditFile(fileName);
         initComponents();
-        try
-        {
+        try {
             setStrings();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Problem while reading in Strings for the new note screen." + e);
         }
         openFile();
     }
-    
+
     /**
-     * Sets the texts in the labels and on the buttons from the language settings file.
-     * @throws IOException 
+     * Sets the texts in the labels and on the buttons from the language
+     * settings file.
+     *
+     * @throws IOException
      */
-    private void setStrings() throws IOException
-    {
+    private void setStrings() throws IOException {
         Ini ini = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\LifeplannerSettings.ini"));
         Ini language = new Ini(new File("C:\\Users\\" + NTSystem.getName() + "\\Documents\\LifePlanner\\Settings\\Languages\\" + ini.get("header", "language") + ".ini"));
         doneButton.setText(language.get("common", "done"));
     }
-    
+
     /**
      * Opens a specific file in the editor.
      */
-    private void openFile()
-    {
-        try
-        {
+    private void openFile() {
+        try {
             String[] lines = file.openFile();
-            
-            for(int i = 0; i < lines.length; i++)
-            {
-                if(i == 0)
-                {
+
+            for (int i = 0; i < lines.length; i++) {
+                if (i == 0) {
                     this.titleField.setText(lines[i]);
-                }
-                else if(i == 1)
-                {
-                    
-                }
-                else
-                {
+                } else if (i == 1) {
+
+                } else {
                     this.mainTextArea.setText(this.mainTextArea.getText() + lines[i] + "\n");
                 }
             }
-            
-        }
-        catch (Exception e)
-        {
+
+        } catch (Exception e) {
             System.out.println("Problem when reading file." + e);
         }
     }
-    
+
     /**
      * Writes a file.
-     * @throws IOException 
+     *
+     * @throws IOException
      */
-    private void writeFile() throws IOException
-    {
+    private void writeFile() throws IOException {
         file.writeToFile(this.titleField.getText(), false);
         file.writeToFile("", true);
         file.writeToFile(this.mainTextArea.getText(), true);
@@ -144,20 +133,17 @@ public class FileEditor extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Tries to write the changes to the file, refreshes the files list and closes the window.
+     * Tries to write the changes to the file, refreshes the files list and
+     * closes the window.
+     *
      * @param evt The event that has to be passed through but isn't used.
      */
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
-        try
-        {
+        try {
             this.writeFile();
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             System.out.println("Problem while writing file." + ex);
-        }
-        finally
-        {
+        } finally {
             this.notesScreen.refresh();
             this.dispose();
         }
